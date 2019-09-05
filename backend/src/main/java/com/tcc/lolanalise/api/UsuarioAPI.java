@@ -25,10 +25,10 @@ public class UsuarioAPI {
 	}
 
 	@PostMapping("/cadastro")
-	public String cadastroUsuario(@RequestBody UsuarioDTO usuario) {
+	public UsuarioDTO cadastroUsuario(@RequestBody UsuarioDTO usuario) {
 		return usuarioAS.cadastroUsuario(usuario);
 	}
-	
+
 	@GetMapping("/user/me")
     public UserPrincipal getCurrentUser(@CurrentUser UserPrincipal currentUser) {
         return currentUser;

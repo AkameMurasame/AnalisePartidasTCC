@@ -23,7 +23,7 @@ public class UsuarioAS {
 		return usuarioService.login(mapper.map(usuario, Usuario.class));
 }
 
-	public Usuario cadastroUsuario(UsuarioDTO usuario) {
-		return usuarioService.cadastroUsuario(mapper.map(usuario, Usuario.class));
+	public UsuarioDTO cadastroUsuario(UsuarioDTO usuario) {
+		return mapper.map(usuarioService.cadastroUsuario(mapper.map(usuario, Usuario.class)), UsuarioDTO.class);
 	}
 }

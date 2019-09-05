@@ -3,7 +3,6 @@ package com.tcc.lolanalise.config;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.BeanIds;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -20,10 +19,6 @@ import com.tcc.lolanalise.security.CustomUserDetailsService;
 import com.tcc.lolanalise.security.JwtAuthenticationEntryPoint;
 import com.tcc.lolanalise.security.JwtAuthenticationFilter;
 
-
-/**
- * Created by rajeevkumarsingh on 01/08/17.
- */
 
 @Configuration
 @EnableWebSecurity

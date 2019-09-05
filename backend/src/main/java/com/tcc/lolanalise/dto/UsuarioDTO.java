@@ -1,9 +1,5 @@
 package com.tcc.lolanalise.dto;
 
-import java.util.List;
-
-import com.tcc.lolanalise.domain.Role;
-
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.EqualsAndHashCode;
