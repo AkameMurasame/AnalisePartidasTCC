@@ -29,6 +29,9 @@ public class InvocadorService {
 	@NonNull
 	private InvocadorRepository invocadorRepository;
 
+	@NonNull
+	private DataDragonService dataDragonService;
+
 	public Summoner validarInvocador(String nickname) {
 		return riotApiService.getInvocadorByNickName(nickname);
 	}
@@ -46,7 +49,7 @@ public class InvocadorService {
 		PartidaDTO partidaDTO = new PartidaDTO();
 		List<PartidaDTO> historico = new ArrayList<PartidaDTO>();
 		if (!matchList.getMatches().equals(null)) {
-			for (int index = 0; index < 20; index++) {
+			for (int index = 0; index < 10; index++) {
 				Match partida = riotApiService.getInformacoesPartida(matchList.getMatches().get(index).getGameId());
 				Participant dadosPlayer = partida.getParticipantByAccountId(accountId);
 				ParticipantStats dadosPartida = dadosPlayer.getStats();
@@ -68,14 +71,14 @@ public class InvocadorService {
 
 				List<ItemDTO> itens = new ArrayList<ItemDTO>();
 				for (int indexBuild = 0; indexBuild < 6; indexBuild++) {
-					itens.add(new ItemDTO(getItem(index, dadosPartida), "url"));
+					itens.add(new ItemDTO(getItem(index, dadosPartida), dataDragonService.getItemIconUrl(getItem(index, dadosPartida))));
 				}
 
 				partidaDTO.setBuild(itens);
 
 				List<SpellDTO> spells = new ArrayList<SpellDTO>();
-				spells.add(new SpellDTO(dadosPlayer.getSpell1Id(), "url"));
-				spells.add(new SpellDTO(dadosPlayer.getSpell2Id(), "url"));
+				spells.add(new SpellDTO(dadosPlayer.getSpell1Id(), dataDragonService.getSpellIconUrl("ignite")));
+				spells.add(new SpellDTO(dadosPlayer.getSpell2Id(), dataDragonService.getSpellIconUrl("ignite")));
 
 				partidaDTO.setSpells(spells);
 				partidaDTO.setId(partida.getGameId());
