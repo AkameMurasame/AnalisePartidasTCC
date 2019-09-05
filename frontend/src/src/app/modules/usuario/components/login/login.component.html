@@ -1,0 +1,16 @@
+<modal-component (onSave)="save()" [configModal]="configModal">
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit(checkoutForm.value)">
+        <div class="row">
+            <div class="col-12 mb-2">
+                <label>Usuario:</label>
+                <input id="usuario" type="text" class="form-control" formControlName="usuario">
+            </div>
+            <div class="col-12">
+                <label>Senha:</label>
+                <input id="senha" type="password" class="form-control" formControlName="senha">
+            </div>
+        </div>
+    </form>
+</modal-component>
+
+<button class="btn btn-outline-primary mb-2 mr-2" (click)="openModal()">Login</button>
