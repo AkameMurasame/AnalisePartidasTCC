@@ -9,9 +9,6 @@ import org.springframework.stereotype.Component;
 
 import java.util.Date;
 
-/**
- * Created by rajeevkumarsingh on 19/08/17.
- */
 @Component
 public class JwtTokenProvider {
 
@@ -23,10 +20,7 @@ public class JwtTokenProvider {
     @Value("${app.jwtExpirationInMs}")
     private int jwtExpirationInMs;
 
-    public String generateToken(Authentication authentication) {
-
-        UserPrincipal userPrincipal = (UserPrincipal) authentication.getPrincipal();
-
+    public String generateToken(UserPrincipal userPrincipal) {
         Date now = new Date();
         Date expiryDate = new Date(now.getTime() + jwtExpirationInMs);
 

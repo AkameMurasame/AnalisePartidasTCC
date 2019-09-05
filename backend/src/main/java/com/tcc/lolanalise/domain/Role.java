@@ -27,10 +27,12 @@ import lombok.ToString;
 @Entity
 @Table(name = "roles")
 public class Role {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
 
-    @Column(length = 60)
-    private String name;
+	@Enumerated(EnumType.STRING)
+	@NaturalId
+	@Column(length = 60)
+	private RoleName name;
 }

@@ -18,14 +18,12 @@ public class UsuarioAS {
 
 	@NonNull
 	private ConverterMapper mapper;
-	
+
 	public UsuarioDTO login(UsuarioDTO usuario) {
-		String jwt = usuarioService.login(mapper.map(usuario, Usuario.class));
-		usuario.setAuthToken(jwt);
-		return usuario;
+		return usuarioService.login(mapper.map(usuario, Usuario.class));
 }
-	
-	public String cadastroUsuario(UsuarioDTO usuario) {
+
+	public Usuario cadastroUsuario(UsuarioDTO usuario) {
 		return usuarioService.cadastroUsuario(mapper.map(usuario, Usuario.class));
 	}
 }

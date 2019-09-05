@@ -20,15 +20,13 @@ import lombok.ToString;
 @EqualsAndHashCode(of = "id")
 @ToString
 public class UsuarioDTO {
-  private Long id;
- 
-  private String username;
+	private Long id;
 
-  private String email;
- 
-  private String password;
-  
-  private List<Role> roles;
-  
-  private String authToken;
+	private String username;
+
+	private String email;
+
+	private String password;
+
+	private String accessToken;
 }
