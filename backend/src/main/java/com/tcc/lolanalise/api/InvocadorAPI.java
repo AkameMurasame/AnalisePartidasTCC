@@ -36,8 +36,8 @@ public class InvocadorAPI {
 		return invocadorAS.saveInvocador(invocador, currentUser);
 	}
 
-	@GetMapping("/historico")
-	public List<PartidaDTO> getHistorico(@CurrentUser UserPrincipal usuario) {
-		return invocadorAS.getHistorico("");
+	@GetMapping("/historico/{accountID}")
+	public List<PartidaDTO> getHistorico(@CurrentUser UserPrincipal usuario, @PathVariable String accountID) {
+		return invocadorAS.getHistorico(accountID);
 	}
 }

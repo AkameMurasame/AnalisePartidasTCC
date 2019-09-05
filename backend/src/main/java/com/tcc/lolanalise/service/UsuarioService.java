@@ -3,7 +3,6 @@ package com.tcc.lolanalise.service;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -17,7 +16,7 @@ import com.tcc.lolanalise.domain.Role;
 import com.tcc.lolanalise.domain.RoleName;
 import com.tcc.lolanalise.domain.Usuario;
 import com.tcc.lolanalise.dto.UsuarioDTO;
-import com.tcc.lolanalise.exception.CustomException;
+import com.tcc.lolanalise.exception.AppException;
 import com.tcc.lolanalise.repository.UsuarioRepository;
 import com.tcc.lolanalise.security.JwtTokenProvider;
 import com.tcc.lolanalise.security.UserPrincipal;
@@ -43,8 +42,7 @@ public class UsuarioService {
 	@ExceptionHandler
 	public UsuarioDTO login(Usuario usuario) {
 		try {
-			Authentication authentication = authenticationManager.authenticate(
-					new UsernamePasswordAuthenticationToken(usuario.getUsername(), usuario.getPassword()));
+			Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(usuario.getUsername(), usuario.getPassword()));
 			SecurityContextHolder.getContext().setAuthentication(authentication);
 			UserPrincipal userPrincipal = (UserPrincipal) authentication.getPrincipal();
 			String jwt = tokenProvider.generateToken(userPrincipal);
@@ -58,7 +56,7 @@ public class UsuarioService {
 		}
 	}
 
-	public Usuario cadastroUsuario(Usuario usuario) throws CustomException {
+	public Usuario cadastroUsuario(Usuario usuario) throws AppException {
 		if (!userRepository.existsByUsername(usuario.getUsername())) {
 			usuario.setPassword(passwordEncoder.encode(usuario.getPassword()));
 			List<Role> roles = new ArrayList<Role>();
@@ -68,7 +66,7 @@ public class UsuarioService {
 			usuario.setRoles(roles);
 			return userRepository.save(usuario);
 		} else {
-			throw new CustomException("Username is already in use", HttpStatus.UNPROCESSABLE_ENTITY);
+			throw new AppException("Username is already in use");
 		}
 	}
 }
