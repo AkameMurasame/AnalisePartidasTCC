@@ -1,19 +1,17 @@
 package com.tcc.lolanalise.dto;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
+import java.util.List;
+
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import lombok.ToString;
 
 @Getter
 @Setter
-@Builder
 @NoArgsConstructor
-@AllArgsConstructor
-@ToString
 public class PartidaDTO {
+	private Long id;
+
 	private Boolean resultado;
 
 	private Integer multiKill;
@@ -24,11 +22,11 @@ public class PartidaDTO {
 
 	private Integer nomeCampeao;
 
-	//private Lista de Speel
+	private List<ItemDTO> build;
 
 	private String kda;
 
-	//Lista de itens
+	private List<SpellDTO> spells;
 
 	private Long scoreVisao;
 
