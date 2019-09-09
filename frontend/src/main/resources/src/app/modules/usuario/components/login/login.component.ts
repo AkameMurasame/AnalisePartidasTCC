@@ -45,10 +45,7 @@ export class LoginComponent implements OnInit {
 
   get f() { return this.loginForm.controls; }
 
-  save() {
-    this.modal.closeModal();
-    this.submitted = true;
-
+  onSubmit() {
     if (this.loginForm.invalid) {
       this.modal.openVerticallyCentered();
       return;
@@ -58,15 +55,10 @@ export class LoginComponent implements OnInit {
       .pipe(first())
       .subscribe(
         data => {
-          this.modal.closeModal();
           this.router.navigate(['dashboard']);
         },
         error => {
-          setTimeout(() => {
-            this.modal.openVerticallyCentered();
-          }, 3000);
           console.log(error);
-          console.log('to aqui');
         });
   }
 

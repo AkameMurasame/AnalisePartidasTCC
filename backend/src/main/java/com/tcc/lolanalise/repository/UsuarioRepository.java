@@ -9,7 +9,7 @@ import org.springframework.stereotype.Repository;
 import com.tcc.lolanalise.domain.Usuario;
 
 @Repository
-public interface UsuarioRepository extends JpaRepository<Usuario, Long> {
+public interface UsuarioRepository extends JpaRepository<Usuario, Integer> {
 	Optional<Usuario> findByEmail(String email);
 
     Optional<Usuario> findByUsernameOrEmail(String username, String email);

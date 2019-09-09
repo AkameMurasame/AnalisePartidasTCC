@@ -1,6 +1,6 @@
-<modal-component (onSave)="save()" [configModal]="configModal">
-    <form [formGroup]="loginForm" (ngSubmit)="onSubmit(checkoutForm.value)">
-        <div class="row">
+<div class="w3-card">
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+        <div class="row p-3">
             <div class="col-12 mb-2">
                 <label>Usuario:</label>
                 <input id="usuario" type="text" class="form-control" formControlName="usuario">
@@ -9,8 +9,9 @@
                 <label>Senha:</label>
                 <input id="senha" type="password" class="form-control" formControlName="senha">
             </div>
+            <div class="col-12 mt-3">
+                <button class="btn btn-outline-success btn-lg float-right" type="submit">Login</button>
+            </div>
         </div>
     </form>
-</modal-component>
-
-<button class="btn btn-outline-primary mb-2 mr-2" (click)="openModal()">Login</button>
+</div>

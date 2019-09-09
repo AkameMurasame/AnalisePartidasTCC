@@ -2,11 +2,12 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { ModalComponent } from '../../../shared/components/modal/modal.component';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ConfigModal } from 'src/app/modules/shared/components/modal/configModal';
-import { UsuarioServices } from 'src/app/services/usuario.services';
-import { User } from 'src/app/models/user';
+import { User } from 'src/app/models/user.class';
 import { first } from 'rxjs/operators';
 import { Router } from '@angular/router';
 import { AuthenticationService } from 'src/app/services/authentication.service';
+import { UsuarioService } from 'src/app/services/usuario.service';
+import { InvocadorService } from 'src/app/services/invocador.service';
 
 @Component({
   selector: 'cadastro-component',
@@ -27,7 +28,11 @@ export class CadastroComponent implements OnInit {
   cssBody = 'modal-body';
   textHeader = 'Cadastro';
 
-  constructor(private formBuilder: FormBuilder, private usuarioService: UsuarioServices, private router: Router, private authenticationService: AuthenticationService) {
+  constructor(private formBuilder: FormBuilder,
+              private usuarioService: UsuarioService,
+              private router: Router,
+              private authenticationService: AuthenticationService,
+              private invocadorService: InvocadorService) {
     this.configModal = new ConfigModal(this.cssFooter, this.cssHeader, this.cssBody, this.textHeader);
   }
 
@@ -41,11 +46,13 @@ export class CadastroComponent implements OnInit {
 
   get form() { return this.cadastroForm.controls; }
 
-  save() {
+  onSubmit() {
     if (this.cadastroForm.invalid) {
       this.modal.openVerticallyCentered();
       return;
     }
+
+    console.log(this.cadastroForm);
 
     this.usuario = new User();
     this.usuario.username = this.form.usuario.value;
@@ -56,29 +63,18 @@ export class CadastroComponent implements OnInit {
       .pipe(first())
       .subscribe(
         data => {
-          this.modal.closeModal();
-          this.authenticationService.login(data.username, data.password)
+          this.authenticationService.login(this.usuario.username, this.usuario.password)
             .pipe(first())
             .subscribe(
               usuario => {
-                this.modal.closeModal();
-                //Insert Invocador
-                //this.router.navigate(['dashboard']);
+                this.router.navigate(['cadastro/invocador']);
               },
               error => {
-                setTimeout(() => {
-                  this.modal.openVerticallyCentered();
-                }, 3000);
                 console.log(error);
-                console.log('to aqui');
               });
         },
         error => {
-          setTimeout(() => {
-            this.modal.openVerticallyCentered();
-          }, 3000);
           console.log(error);
-          console.log('to aqui');
         });
   }
 

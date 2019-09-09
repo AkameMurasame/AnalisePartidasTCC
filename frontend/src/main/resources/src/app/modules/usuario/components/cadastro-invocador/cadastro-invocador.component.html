@@ -1,0 +1,11 @@
+<div class="row">
+    <form [formGroup]="invocadorForm" (ngSubmit)="registrarInvocador()">
+        <div class="col-12">
+            <label>Nome de invocador:</label>
+            <input type="text" class="form-control" formControlName="invocador"/>
+        </div>
+        <div class="col-12">
+            <button class="btn btn-outline-success">Cadastrar</button>
+        </div>
+    </form>
+</div>

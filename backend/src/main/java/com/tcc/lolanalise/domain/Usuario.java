@@ -55,4 +55,6 @@ public class Usuario implements Serializable {
 					@JoinColumn(name = "id_permicao", referencedColumnName = "id") })
 	@ManyToMany
 	private Collection<Permicoes> permicoesCollection;
+	@Column(name = "valido")
+	private Boolean valido;
 }

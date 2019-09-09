@@ -26,12 +26,12 @@ public class InvocadorAPI {
 	@NonNull
 	private InvocadorAS invocadorAS;
 
-	@GetMapping("/getBy/nickname/{nickname}")
+	@GetMapping("/validar/{nickname}")
 	public InvocadorDTO getInvocadorByNickname(@PathVariable String nickname) {
-		return invocadorAS.getInvocadorByNickname(nickname);
+		return invocadorAS.validarInvocador(nickname);
 	}
 
-	@PostMapping("/save")
+	@PostMapping("/registrar")
 	public InvocadorDTO saveInvocador(@RequestBody InvocadorDTO invocador, @CurrentUser UserPrincipal currentUser) {
 		return invocadorAS.saveInvocador(invocador, currentUser);
 	}

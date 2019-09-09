@@ -1,12 +1,24 @@
-<body>
-    <div class="hero bg-overlay" data-bg="\assets\lol_banner.jpg">
-        <div class="overlay"></div>
-        <div class="text">
-            <h1 class="lead">League of Duo</h1>
-            <p><span class="bold">cria uma frase ai to sem ideia</span>, <span class="bold"></span>.</p>
-            <div class="cta">
-                <a class="btn btn-primary smooth-link" href="">Cadastro</a>
-            </div>
-        </div>
+<section class="row p-3 w-95">
+    <div class="col-6">
+        <div class="w-100"><input class="form-control"></div>
     </div>
-</body>
+    <div class="col-6 d-flex align-self-center justify-content-center">
+        <div class="w3-card" *ngIf="mostrarCadastroUsuario == false && mostrarLogin == false">
+            <h5>
+                <p>Bem Vindo ao Projeto</p>
+            </h5>
+
+            <button type="button" class="btn btn-primary"
+                (click)="mostrarLogin = true; mostrarCadastroUsuario = false">Já possui uma conta?</button>
+
+            <button type="button" class="btn bnt-primary"
+                (click)="mostrarCadastroUsuario = true; mostrarLogin = false">Registro</button>
+        </div>
+
+        <login-component *ngIf="mostrarLogin"></login-component>
+
+        <cadastro-component *ngIf="mostrarCadastroUsuario"></cadastro-component>
+
+        <button (click)="mostrarLogin = false; mostrarCadastroUsuario = false" class="btn btn-outline-danger">Voltar</button>
+    </div>
+</section>

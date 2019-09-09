@@ -25,4 +25,6 @@ public class UsuarioDTO {
 	private String password;
 
 	private String accessToken;
+
+	private Boolean valido;
 }

@@ -3,4 +3,5 @@ export class User {
     password: string;
     email: string;
     accessToken?: string;
+    valido: string;
 }

@@ -29,7 +29,7 @@ public class CustomUserDetailsService implements UserDetailsService {
     }
 
     @Transactional
-    public UserDetails loadUserById(Long id) {
+    public UserDetails loadUserById(Integer id) {
     	Usuario user = userRepository.findById(id).orElse(null);
         return UserPrincipal.create(user);
     }

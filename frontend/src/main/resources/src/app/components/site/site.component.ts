@@ -9,11 +9,17 @@ import { Router } from '@angular/router';
 })
 export class SiteComponent implements OnInit {
 
+
+  mostrarLogin: boolean;
+  mostrarCadastroUsuario: boolean;
+
   constructor(private authenticationService: AuthenticationService, private router: Router) {
     const currentUser = this.authenticationService.currentUserValue;
     if (currentUser) {
       this.router.navigate(['dashboard']);
     }
+    this.mostrarCadastroUsuario = false;
+    this.mostrarLogin = false;
   }
 
   ngOnInit() {

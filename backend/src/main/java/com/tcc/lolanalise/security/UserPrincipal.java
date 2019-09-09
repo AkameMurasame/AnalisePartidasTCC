@@ -31,6 +31,7 @@ public class UserPrincipal implements UserDetails {
 
 	private Integer id;
 
+	@JsonIgnore
     private String username;
 
     @JsonIgnore
@@ -38,6 +39,8 @@ public class UserPrincipal implements UserDetails {
 
     @JsonIgnore
     private String password;
+
+    private Boolean valido;
 
     private Collection<? extends GrantedAuthority> authorities;
 
@@ -51,6 +54,7 @@ public class UserPrincipal implements UserDetails {
                 user.getUsername(),
                 user.getEmail(),
                 user.getPassword(),
+                user.getValido(),
                 authorities
         );
     }
