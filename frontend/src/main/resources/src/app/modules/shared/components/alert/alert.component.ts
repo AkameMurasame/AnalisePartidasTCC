@@ -11,14 +11,16 @@ export class AlertComponent implements OnInit {
   private _success = new Subject<string>();
 
   staticAlertClosed = false;
+
+  @Input()
   type: string;
 
   @Input()
   message: string;
 
   constructor() {
-    this.type = "success";
-    this.message = "teste";
+    //this.type = "success";
+    //this.message = "teste";
   }
 
   ngOnInit(): void {

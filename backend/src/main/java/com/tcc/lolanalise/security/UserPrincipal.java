@@ -29,7 +29,7 @@ import lombok.ToString;
 public class UserPrincipal implements UserDetails {
 	private static final long serialVersionUID = 1L;
 
-	private Long id;
+	private Integer id;
 
     private String username;
 
@@ -42,8 +42,8 @@ public class UserPrincipal implements UserDetails {
     private Collection<? extends GrantedAuthority> authorities;
 
     public static UserPrincipal create(Usuario user) {
-        List<GrantedAuthority> authorities = user.getRoles().stream().map(role ->
-                new SimpleGrantedAuthority(role.getName().name())
+        List<GrantedAuthority> authorities = user.getPermicoesCollection().stream().map(permicao ->
+                new SimpleGrantedAuthority(permicao.getNome())
         ).collect(Collectors.toList());
 
         return new UserPrincipal(

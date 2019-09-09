@@ -63,8 +63,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		http.cors().and().csrf().disable();
 		http.exceptionHandling().authenticationEntryPoint(unauthorizedHandler);
 		http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
-		http.authorizeRequests().antMatchers("/cadastro").permitAll().
-		antMatchers("/login").permitAll().anyRequest().authenticated();
+		http.authorizeRequests().antMatchers("/usuario/cadastro").permitAll().
+		antMatchers("/usuario/login").permitAll().anyRequest().authenticated();
 		http.addFilterBefore(jwtAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class);
 	}
 }

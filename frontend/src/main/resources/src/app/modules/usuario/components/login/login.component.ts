@@ -16,26 +16,23 @@ export class LoginComponent implements OnInit {
   @ViewChild(ModalComponent, { static: true })
   modal: ModalComponent;
 
-  @ViewChild(ModalComponent, { static: true })
-  errorModal: ErrorComponent;
-
   loginForm: FormGroup;
 
   configModal: ConfigModal;
 
   submitted = false;
 
-  cssFooter = "modal-footer";
-  cssHeader = "modal-header justify-content-center";
-  cssBody = "modal-body";
-  textHeader = "Login";
+  cssFooter = 'modal-footer';
+  cssHeader = 'modal-header justify-content-center';
+  cssBody = 'modal-body';
+  textHeader = 'Login';
 
   validationErros: any;
 
   constructor(private formBuilder: FormBuilder,
-    private route: ActivatedRoute,
-    private router: Router,
-    private authenticationService: AuthenticationService) {
+              private route: ActivatedRoute,
+              private router: Router,
+              private authenticationService: AuthenticationService) {
     this.configModal = new ConfigModal(this.cssFooter, this.cssHeader, this.cssBody, this.textHeader);
   }
 
@@ -69,7 +66,7 @@ export class LoginComponent implements OnInit {
             this.modal.openVerticallyCentered();
           }, 3000);
           console.log(error);
-          console.log("to aqui");
+          console.log('to aqui');
         });
   }
 

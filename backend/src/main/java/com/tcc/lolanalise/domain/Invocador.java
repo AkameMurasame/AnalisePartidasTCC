@@ -1,42 +1,37 @@
 package com.tcc.lolanalise.domain;
 
+import java.io.Serializable;
+
+import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
+import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import lombok.ToString;
 
-@Getter
-@Setter
-@Builder
-@NoArgsConstructor
-@AllArgsConstructor
-@ToString
 @Entity
 @Table(name = "invocador")
-public class Invocador extends BaseEntity<String> {
-	private static final long serialVersionUID = 1L;
-	
-	@Column(name = "accountId", nullable = false)
-	private String accountId;
-	
-	@Id
-	@Column(name = "id", nullable = false)
-	private String id;
-	
-	@Column(name = "puuid", nullable = false)
-	private String puuid;
-	
-	@OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "usuario_id")
+@Getter
+@Setter
+@NoArgsConstructor
+@NamedQueries({
+    @NamedQuery(name = "Invocador.findAll", query = "SELECT i FROM Invocador i"),
+    @NamedQuery(name = "Invocador.findByAccountId", query = "SELECT i FROM Invocador i WHERE i.accountId = :accountId")})
+public class Invocador implements Serializable {
+    private static final long serialVersionUID = 1L;
+    @Id
+    @Basic(optional = false)
+    @Column(name = "accountId")
+    private String accountId;
+    @JoinColumn(name = "id_usuario", referencedColumnName = "id")
+    @ManyToOne(optional = false)
     private Usuario usuario;
+
 }

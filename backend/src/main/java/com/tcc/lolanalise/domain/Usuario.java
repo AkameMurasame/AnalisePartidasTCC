@@ -1,58 +1,58 @@
 package com.tcc.lolanalise.domain;
 
-import java.util.List;
+import java.io.Serializable;
+import java.util.Collection;
 
+import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
-import javax.validation.constraints.Size;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
-import lombok.AllArgsConstructor;
-import lombok.Builder;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
-@Getter
-@Setter
-@Builder
-@NoArgsConstructor
-@AllArgsConstructor
-@ToString
 @Entity
 @Table(name = "usuarios")
-public class Usuario extends BaseEntity<Long> {
+@Getter
+@Setter
+@NoArgsConstructor
+@ToString
+@EqualsAndHashCode
+@NamedQueries({ @NamedQuery(name = "Usuario.findAll", query = "SELECT u FROM Usuario u"),
+		@NamedQuery(name = "Usuario.findById", query = "SELECT u FROM Usuario u WHERE u.id = :id"),
+		@NamedQuery(name = "Usuario.findByUsuario", query = "SELECT u FROM Usuario u WHERE u.username = :usuario"),
+		@NamedQuery(name = "Usuario.findBySenha", query = "SELECT u FROM Usuario u WHERE u.password = :senha"),
+		@NamedQuery(name = "Usuario.findByEmail", query = "SELECT u FROM Usuario u WHERE u.email = :email") })
+public class Usuario implements Serializable {
 	private static final long serialVersionUID = 1L;
-
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "id", nullable = false)
-	private Long id;
-
-	@JsonIgnore
-	@Size(min = 4, max = 255, message = "Minimum username length: 4 characters")
-	@Column(name = "username", unique = true, nullable = false)
+	@Basic(optional = false)
+	@Column(name = "id")
+	private Integer id;
+	@Basic(optional = false)
+	@Column(name = "usuario")
 	private String username;
-
-	@JsonIgnore
-	@Column(name = "email", unique = true, nullable = false)
-	private String email;
-
-	@JsonIgnore
-	@Size(min = 8, message = "Minimum password length: 8 characters")
+	@Basic(optional = false)
+	@Column(name = "senha")
 	private String password;
-	
-	@ManyToMany(fetch = FetchType.LAZY)
-	@JoinTable(name = "user_roles", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
-	private List<Role> roles;
+	@Basic(optional = false)
+	@Column(name = "email")
+	private String email;
+	@JoinTable(name = "permicoes_usuario", joinColumns = {
+			@JoinColumn(name = "id_usuario", referencedColumnName = "id") }, inverseJoinColumns = {
+					@JoinColumn(name = "id_permicao", referencedColumnName = "id") })
+	@ManyToMany
+	private Collection<Permicoes> permicoesCollection;
 }

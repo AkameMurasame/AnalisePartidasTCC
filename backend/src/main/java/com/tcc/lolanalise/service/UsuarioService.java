@@ -1,8 +1,5 @@
 package com.tcc.lolanalise.service;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -12,8 +9,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
-import com.tcc.lolanalise.domain.Role;
-import com.tcc.lolanalise.domain.RoleName;
 import com.tcc.lolanalise.domain.Usuario;
 import com.tcc.lolanalise.dto.UsuarioDTO;
 import com.tcc.lolanalise.exception.AppException;
@@ -59,11 +54,7 @@ public class UsuarioService {
 	public Usuario cadastroUsuario(Usuario usuario) throws AppException {
 		if (!userRepository.existsByUsername(usuario.getUsername())) {
 			usuario.setPassword(passwordEncoder.encode(usuario.getPassword()));
-			List<Role> roles = new ArrayList<Role>();
-			Role role = new Role();
-			role.setName(RoleName.ROLE_USER);
-			roles.add(role);
-			usuario.setRoles(roles);
+
 			return userRepository.save(usuario);
 		} else {
 			throw new AppException("Username is already in use");
