@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.tcc.lolanalise.as.InvocadorAS;
 import com.tcc.lolanalise.dto.InvocadorDTO;
-import com.tcc.lolanalise.dto.PartidaDTO;
+import com.tcc.lolanalise.dto.PartidaHistoricoDTO;
 import com.tcc.lolanalise.security.CurrentUser;
 import com.tcc.lolanalise.security.UserPrincipal;
 
@@ -37,7 +37,7 @@ public class InvocadorAPI {
 	}
 
 	@GetMapping("/historico/{accountID}")
-	public List<PartidaDTO> getHistorico(@CurrentUser UserPrincipal usuario, @PathVariable String accountID) {
+	public List<PartidaHistoricoDTO> getHistorico(@CurrentUser UserPrincipal usuario, @PathVariable String accountID) {
 		return invocadorAS.getHistorico(accountID);
 	}
 }

@@ -40,12 +40,12 @@ public class UserPrincipal implements UserDetails {
     @JsonIgnore
     private String password;
 
-    private Boolean valido;
+    private String valido;
 
     private Collection<? extends GrantedAuthority> authorities;
 
     public static UserPrincipal create(Usuario user) {
-        List<GrantedAuthority> authorities = user.getPermicoesCollection().stream().map(permicao ->
+        List<GrantedAuthority> authorities = user.getPermicoes().stream().map(permicao ->
                 new SimpleGrantedAuthority(permicao.getNome())
         ).collect(Collectors.toList());
 

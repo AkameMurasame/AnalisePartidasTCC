@@ -1,7 +1,12 @@
 package com.tcc.lolanalise.service;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
+import com.tcc.lolanalise.comum.ConverterMapper;
+
+import lombok.NonNull;
 import net.rithms.riot.api.ApiConfig;
 import net.rithms.riot.api.RiotApi;
 import net.rithms.riot.api.RiotApiException;
@@ -16,8 +21,13 @@ public class RiotApiService {
 	private ApiConfig config;
 	private RiotApi api;
 
+    private static final Logger logger = LoggerFactory.getLogger(RiotApiService.class);
+
+    @NonNull
+	private ConverterMapper mapper;
+
 	public RiotApiService() {
-		config = new ApiConfig().setKey("RGAPI-da9f7260-2329-45b9-9380-9cefb71f5fd8");
+		config = new ApiConfig().setKey("RGAPI-56974c50-0a8d-4cf0-b4b7-ab2693b2b7f7");
 		api = new RiotApi(config);
 	}
 
@@ -25,8 +35,7 @@ public class RiotApiService {
 		try {
 			return api.getSummonerByName(Platform.BR, nickname);
 		} catch (RiotApiException e) {
-			//Colocar Log dps
-			e.getMessage();
+	        logger.error("ERROR. Message - {}", RiotApiService.class + " | " + e.getMessage());
 		}
 		return null;
 	}
@@ -35,8 +44,7 @@ public class RiotApiService {
 		try {
 			return api.getMatchListByAccountId(Platform.BR, accountId);
 		} catch (RiotApiException e) {
-			//Colocar Log dps
-			e.getMessage();
+			logger.error("ERROR. Message - {}", RiotApiService.class + " | " + e.getMessage());
 		}
 		return null;
 	}
@@ -45,9 +53,12 @@ public class RiotApiService {
 		try {
 			return api.getMatch(Platform.BR, idPartida);
 		} catch (RiotApiException e) {
-			//Colocar Log dps
-			e.getMessage();
+			logger.error("ERROR. Message - {}", RiotApiService.class + " | " + e.getMessage());;
 		}
 		return null;
+	}
+
+	public <S, D> D convertRiotClasses(S sourceObject, Class<D> destinationClass) {
+		return mapper.map(sourceObject, destinationClass);
 	}
 }

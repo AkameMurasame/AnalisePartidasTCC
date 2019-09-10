@@ -1,6 +1,5 @@
-import { Component, EventEmitter, Output,ViewChild, ElementRef, Input } from '@angular/core';
+import { Component, EventEmitter, Output, ViewChild, ElementRef, Input } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { ConfigModal } from './configModal';
 
 @Component({
   selector: 'modal-component',
@@ -8,20 +7,10 @@ import { ConfigModal } from './configModal';
   styleUrls: ['./modal.component.scss']
 })
 export class ModalComponent {
-
-  @Output()
-  onSave: EventEmitter<void> = new EventEmitter<void>();
-
-  @ViewChild('content', {static: false}) 
+  @ViewChild('content', {static: false})
   content: ElementRef;
 
-  @Input()
-  configModal: ConfigModal;
-
   constructor(private modalService: NgbModal) {   }
-
-  ngOnInit() {
-  }
 
   closeModal() {
     this.modalService.dismissAll();
@@ -51,9 +40,5 @@ export class ModalComponent {
 
   openScrollableContent() {
     this.modalService.open(this.content, { scrollable: true });
-  }
-
-  onSaveEvent(event, modal) {
-    this.onSave.emit()
   }
 }

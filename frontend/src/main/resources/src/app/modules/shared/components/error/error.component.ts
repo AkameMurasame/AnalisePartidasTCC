@@ -7,30 +7,16 @@ import { ConfigModal } from '../modal/configModal';
   templateUrl: './error.component.html',
   styleUrls: ['./error.component.scss']
 })
-export class ErrorComponent implements OnInit {
+export class ErrorComponent {
 
   @ViewChild(ModalComponent, { static: true })
   modal: ModalComponent;
 
-  configModal: ConfigModal;
-
-  @Input()
-  type: string;
-
-  @Input()
-  error: string;
-
-  cssFooter = null;
-  cssHeader = null;
-  cssBody = "modal-body";
-  textHeader = null;
-
-  constructor() {
-    this.configModal = new ConfigModal(this.cssFooter, this.cssHeader, this.cssBody, this.textHeader);
+  constructor() { 
+    console.log(this.modal);
   }
 
-  ngOnInit() {
-    this.modal.openLg();
+  openModal() {
+    this.modal.openVerticallyCentered();
   }
-
 }

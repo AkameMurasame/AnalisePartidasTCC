@@ -8,7 +8,7 @@ import com.tcc.lolanalise.comum.ConverterMapper;
 import com.tcc.lolanalise.domain.Invocador;
 import com.tcc.lolanalise.domain.Usuario;
 import com.tcc.lolanalise.dto.InvocadorDTO;
-import com.tcc.lolanalise.dto.PartidaDTO;
+import com.tcc.lolanalise.dto.PartidaHistoricoDTO;
 import com.tcc.lolanalise.security.UserPrincipal;
 import com.tcc.lolanalise.service.InvocadorService;
 
@@ -36,11 +36,11 @@ public class InvocadorAS {
 	public InvocadorDTO saveInvocador(InvocadorDTO invocador, UserPrincipal currentUser) {
 		Invocador invocadorEntity = mapper.map(invocadorService.getInvocador(invocador.getName()), Invocador.class);
 		Usuario usuario = mapper.map(currentUser, Usuario.class);
-		invocadorEntity.setUsuario(usuario);
+		invocadorEntity.setIdUsuario(usuario);
 		return mapper.map(invocadorService.saveInvocador(invocadorEntity), InvocadorDTO.class);
 	}
 
-	public List<PartidaDTO> getHistorico(String accountId) {
+	public List<PartidaHistoricoDTO> getHistorico(String accountId) {
 		return invocadorService.getHistorico(accountId);
 	}
 }

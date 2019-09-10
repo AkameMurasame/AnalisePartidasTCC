@@ -1,38 +1,34 @@
 package com.tcc.lolanalise.dto;
 
-import java.util.List;
+import java.util.Date;
 
+import com.tcc.lolanalise.domain.Invocador;
+
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
 
 @Getter
 @Setter
+@Builder
 @NoArgsConstructor
+@AllArgsConstructor
+@EqualsAndHashCode(of = "idPartida")
+@ToString
 public class PartidaDTO {
-	private Long id;
+	private Integer idPartida;
 
-	private Boolean resultado;
+	private Long idPartidaRiot;
 
-	private Integer multiKill;
+	private String jsonPartida;
 
-	private Integer duracao;
+	private String jsonReferenciaPartida;
 
-	private String gameType;
+	private Date dataCriacao;
 
-	private Integer nomeCampeao;
-
-	private List<ItemDTO> build;
-
-	private String kda;
-
-	private List<SpellDTO> spells;
-
-	private Long scoreVisao;
-
-	private Integer farm;
-
-	private Integer gold;
-
-	private Integer wards;
+	private Invocador accountId;
 }
