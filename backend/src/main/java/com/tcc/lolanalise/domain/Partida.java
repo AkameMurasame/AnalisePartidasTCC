@@ -62,4 +62,7 @@ public class Partida implements Serializable {
     @JoinColumn(name = "accountId", referencedColumnName = "accountId")
     @ManyToOne(optional = false)
     private Invocador accountId;
+
+    @Column(name = "statusPartida")
+    private StatusPartida statusPartida;
 }

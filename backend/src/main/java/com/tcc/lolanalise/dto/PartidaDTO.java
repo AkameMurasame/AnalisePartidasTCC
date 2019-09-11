@@ -3,6 +3,7 @@ package com.tcc.lolanalise.dto;
 import java.util.Date;
 
 import com.tcc.lolanalise.domain.Invocador;
+import com.tcc.lolanalise.domain.StatusPartida;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -31,4 +32,6 @@ public class PartidaDTO {
 	private Date dataCriacao;
 
 	private Invocador accountId;
+
+	private StatusPartida statusPartida;
 }

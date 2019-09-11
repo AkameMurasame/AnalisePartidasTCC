@@ -9,6 +9,12 @@ import com.tcc.lolanalise.domain.Partida;
 
 public interface PartidaRepository extends JpaRepository<Partida, Integer>{
 
-	@Query("SELECT Partida as pa where pa.accountId = :accountId")
-	public List<Partida> getUltimaPartidaRegistrada(String accountId);
+	@Query("SELECT p from Partida p where p.accountId = :accountId")
+	public List<Partida> getHistorico(String accountId);
+
+	@Query("SELECT p Partida p where p.accountId = :accountId orderBy DESC")
+	public List<Partida> getPartidasOrderByDesc(String accountId);
+
+	@Query("SELECT p from Partida  p JOIN FETCH StatusPartida sp where p.statusPartida.id = :status")
+	public List<Partida> getPartidasByStatus(Integer status);
 }

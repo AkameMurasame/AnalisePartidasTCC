@@ -1,4 +1,4 @@
-package com.tcc.lolanalise.domain;
+package com.tcc.lolanalise.enums;
 
 public enum  RoleName {
     ROLE_USER,
